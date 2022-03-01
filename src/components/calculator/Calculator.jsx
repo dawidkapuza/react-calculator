@@ -11,8 +11,8 @@ export default function Calculator() {
   const [result, expressionHandler] = useCalculator('0')
 
   const onClick = useExpression("", (expression) => {
-    // expressionHandler(expression)
-    // console.log(expression)
+    expressionHandler(expression)
+    console.log(result)
   });
 
   

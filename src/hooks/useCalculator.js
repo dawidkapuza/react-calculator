@@ -6,8 +6,6 @@ export const useCalculator = (defaultResult) => {
 
   const expressionHandler = (expression) => {
     setResult(expression)
-    
-
   }
   
 
