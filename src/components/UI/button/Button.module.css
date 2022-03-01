@@ -1,0 +1,8 @@
+.button {
+  width: 70px;
+  height: 70px;
+  background: black;
+  color: whitesmoke;
+  border: none;
+  cursor: pointer;
+}
