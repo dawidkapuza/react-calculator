@@ -4,13 +4,13 @@ export const useCalculator = (defaultResult) => {
 
   const [result, setResult] = useState(defaultResult)
 
-  const expressionHandler = (expression) => {
+  const setCalculator = (expression) => {
     setResult(expression)
   }
   
 
 
-  return [result, expressionHandler]
+  return [result, setCalculator]
   }
       
       

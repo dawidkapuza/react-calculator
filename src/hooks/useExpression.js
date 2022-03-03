@@ -6,8 +6,6 @@ export const useExpression = (initialValue) => {
       operand: initialValue,
     },
   ]);
-  const [unary, setUnary] = useState(false); // TO DO: Unary Validation
-
   const onClick = (e) => {
     let length = expression.length ? expression.length - 1 : expression.length;
     if (!isNaN(e.target.value)) {
@@ -18,9 +16,18 @@ export const useExpression = (initialValue) => {
         },
       ]);
     } else {
-      if (expression.length < 2 && !e.target.dataset.unary) return;
+      length =
+        e.target.dataset.unary && expression[length].operand === ""
+          ? length
+          : expression[length].operand === ""
+          ? length - 1
+          : length + 1;
 
-      setExpression([...expression, e.target, { operand: initialValue }]);
+      setExpression([
+        ...expression.slice(0, length),
+        e.target,
+        { operand: initialValue },
+      ]);
     }
   };
 

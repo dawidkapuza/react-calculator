@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { useExpression } from "../../hooks/useExpression";
 import Screen from "../screen/Screen";
 import Interface from "../interface/Interface";
@@ -8,11 +8,18 @@ export default function Calculator() {
 
 
  
-  const [result, expressionHandler] = useCalculator('0')
+  const [result, setCalculator] = useCalculator('0')
 
   const [expression, onClick] = useExpression("");
   
-  console.log(expression)
+
+  useEffect(() => {
+  setCalculator(expression)
+   
+  }, [expression, result])
+  console.log(result)
+
+ 
 
   return (
     <div>
