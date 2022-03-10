@@ -1,5 +1,0 @@
-.interface {
-  width: 280px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-}

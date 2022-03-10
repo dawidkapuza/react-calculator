@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 export const useExpression = (initialValue) => {
+  const [unaryIsUsed, setUnaryIsUsed] = useState(false);
   const [expression, setExpression] = useState([
     {
       operand: initialValue,
@@ -15,13 +16,10 @@ export const useExpression = (initialValue) => {
           operand: prevValue[length].operand + e.target.value,
         },
       ]);
+      setUnaryIsUsed(false);
     } else {
-      length =
-        e.target.dataset.unary && expression[length].operand === ""
-          ? length
-          : expression[length].operand === ""
-          ? length - 1
-          : length + 1;
+      if (!length && !e.target.dataset.unary) return;
+      length = expression[length].operand === "" ? length - 1 : length + 1;
 
       setExpression([
         ...expression.slice(0, length),

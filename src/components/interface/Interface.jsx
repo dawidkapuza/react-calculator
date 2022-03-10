@@ -1,24 +1,18 @@
 import React from "react";
-import Button from "../UI/button/Button";
-import cl from "./Interface.module.css";
-import { interfaceContent } from "../../utils/interfaceContent";
+import Screen from "../screen/Screen";
+import ButtonBox from "../buttonBox/ButtonBox";
+import Calculator from "../../hooks/useCalculator";
 
-export default function Interface(props) {
+export default function Interface() {
+  const [result, formattedExpression, onClick] = Calculator.useCalculator("");
+
+  // console.log(result)
+  console.log(formattedExpression);
+
   return (
-    <div className={cl.interface} onClick={props.onClick}>
-      {interfaceContent.map((btn) => {
-        let { value, priority = null, unary = '' } = btn;
-        return (
-          <Button
-            key={value}
-            value={value}
-            data-priority={priority}
-            data-unary={unary}
-          >
-            {value}
-          </Button>
-        );
-      })}
+    <div>
+      <ButtonBox onClick={onClick} />
+      {/* <Screen /> */}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-export const interfaceContent = [
+export const buttonsContent = [
   { value: "C", priority: "", unary: true },
   { value: "<-", priority: "", unary: true },
   { value: "%", priority: "" },
