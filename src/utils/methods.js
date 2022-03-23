@@ -1,3 +1,10 @@
 export default class Methods {
-  ["+"] = (a, b) => a + b;
+  constructor() {
+    this["+"] = (a, b) => a + b;
+    this["-"] = (a, b) => a - b;
+    this["*"] = (a, b) => a * b;
+    this["/"] = (a, b) => a / b;  
+    this["."] = (a, b) => +`${a}.${b}`;
+  }
 }
+

@@ -1,18 +1,16 @@
 import React from "react";
-import Screen from "../screen/Screen";
 import ButtonBox from "../buttonBox/ButtonBox";
-import Calculator from "../../hooks/useCalculator";
+import { calculator } from "../../hooks/useCalculator";
+import cl from "./Interface.module.css";
 
 export default function Interface() {
-  const [result, formattedExpression, onClick] = Calculator.useCalculator("");
+  const [result, formattedExpression, onClick] = calculator.useCalculator("");
 
-  // console.log(result)
-  console.log(formattedExpression);
+  console.log(formattedExpression, result);
 
   return (
-    <div>
+    <div className={cl.interface}>
       <ButtonBox onClick={onClick} />
-      {/* <Screen /> */}
     </div>
   );
 }
