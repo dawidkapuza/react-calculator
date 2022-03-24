@@ -1,5 +1,6 @@
 import React from "react";
 import ButtonBox from "../buttonBox/ButtonBox";
+import Screen from "../screen/Screen";
 import { calculator } from "../../hooks/useCalculator";
 import cl from "./Interface.module.css";
 
@@ -10,6 +11,7 @@ export default function Interface() {
 
   return (
     <div className={cl.interface}>
+      <Screen/>
       <ButtonBox onClick={onClick} />
     </div>
   );

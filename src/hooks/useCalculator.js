@@ -31,7 +31,6 @@ class Calculator extends Methods {
           }
         });
       });
-
     return [result, formattedExpression, onClick];
   };
 }
