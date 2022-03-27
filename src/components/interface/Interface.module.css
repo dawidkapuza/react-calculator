@@ -7,4 +7,12 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  
+}
+
+@media screen and (max-width: 700px) {
+  .interface {
+    height: 90%;
+    width: 100%;
+  }
 }

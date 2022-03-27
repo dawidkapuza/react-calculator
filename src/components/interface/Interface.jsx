@@ -11,7 +11,7 @@ export default function Interface() {
 
   return (
     <div className={cl.interface}>
-      <Screen/>
+      <Screen>{`\r\r\r\r\r${formattedExpression}\r${result[0].operand}`}</Screen>
       <ButtonBox onClick={onClick} />
     </div>
   );

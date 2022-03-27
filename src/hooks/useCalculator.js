@@ -21,7 +21,7 @@ class Calculator extends Methods {
       .sort((a, b) => b.operator.dataset.priority - a.operator.dataset.priority)
       .forEach((byPriority) => {
         result.forEach((item, index) => {
-          if (item?.id == byPriority.id) {
+          if (item?.id === byPriority.id) {
             result.splice(index - 1, 3, {
               operand: this[result[index].operator.value](
                 +result[index - 1].operand,
