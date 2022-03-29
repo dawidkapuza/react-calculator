@@ -1,7 +1,7 @@
 export const buttonsContent = [
   { value: "C", priority: "16", unary: true },
   { value: "del", priority: "15", unary: true },
-  { value: "%", priority: "13" },
+  { value: 'x²', priority: "14" },
   { value: "/", priority: "13" },
   { value: "7",},
   { value: "8",},
@@ -15,7 +15,7 @@ export const buttonsContent = [
   { value: "2",},
   { value: "3",},
   { value: "+", priority: "12" },
-  { value: "?", priority: "15" },
+  { value: "more", priority: "15" },
   { value: "0",},
   { value: ".", priority: "15"},
   { value: "=", priority: "10" },

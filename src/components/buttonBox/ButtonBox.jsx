@@ -5,6 +5,7 @@ import { buttonsContent } from "../../utils/buttonsContent";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDeleteLeft } from "@fortawesome/free-solid-svg-icons";
 import { faRemove } from "@fortawesome/free-solid-svg-icons";
+import { faCompress } from "@fortawesome/free-solid-svg-icons";
 
 export default function ButtonBox(props) {
   return (
@@ -14,7 +15,7 @@ export default function ButtonBox(props) {
         return (
           <Button
             key={value}
-            value={value}
+            value={value === 'x²' ? '^' : value}
             data-priority={priority}
             data-unary={unary}
           >
@@ -28,9 +29,12 @@ export default function ButtonBox(props) {
                 style={{ color: "whitesmoke", height: "16px" }}
                 icon={faRemove}
               />
-            ) : (
-              value
-            )}
+            ) : value === 'more'? (
+              <FontAwesomeIcon
+                style={{ color: "whitesmoke", height: "16px" }}
+                icon={faCompress}
+              />
+            ) : value}
           </Button>
         );
       })}

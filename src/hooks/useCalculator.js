@@ -2,6 +2,7 @@ import { useExpression } from "./useExpression";
 import Methods from "../utils/methods";
 
 class Calculator extends Methods {
+ 
   useCalculator = (defaultResult) => {
     const [expression, onClick] = useExpression(defaultResult);
 
