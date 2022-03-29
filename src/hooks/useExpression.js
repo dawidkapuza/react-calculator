@@ -24,6 +24,7 @@ export const useExpression = (initialValue) => {
       setExpression([{ operand: initialValue }]);
     } else if (btn.value === "del") {
       if (expression[length]?.operand === "") {
+        if (!length) return
         setExpression([...expression.slice(0, length - 1)]);
       } else {
         setExpression([
