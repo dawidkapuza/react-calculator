@@ -2,6 +2,9 @@ import React from "react";
 import Button from "../UI/button/Button";
 import cl from "./ButtonBox.module.css";
 import { buttonsContent } from "../../utils/buttonsContent";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDeleteLeft } from "@fortawesome/free-solid-svg-icons";
+import { faRemove } from "@fortawesome/free-solid-svg-icons";
 
 export default function ButtonBox(props) {
   return (
@@ -15,7 +18,19 @@ export default function ButtonBox(props) {
             data-priority={priority}
             data-unary={unary}
           >
-            {value}
+            {value === "del" ? (
+              <FontAwesomeIcon
+                style={{ color: "whitesmoke", height: "16px" }}
+                icon={faDeleteLeft}
+              />
+            ) : value === "C" ? (
+              <FontAwesomeIcon
+                style={{ color: "whitesmoke", height: "16px" }}
+                icon={faRemove}
+              />
+            ) : (
+              value
+            )}
           </Button>
         );
       })}

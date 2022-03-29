@@ -1,6 +1,6 @@
 export const buttonsContent = [
-  { value: "C", priority: "15", unary: true },
-  { value: "<-", priority: "15", unary: true },
+  { value: "C", priority: "16", unary: true },
+  { value: "del", priority: "15", unary: true },
   { value: "%", priority: "13" },
   { value: "/", priority: "13" },
   { value: "7",},

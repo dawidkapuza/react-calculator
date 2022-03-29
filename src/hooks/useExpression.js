@@ -15,16 +15,28 @@ export const useExpression = (initialValue) => {
           operand: prevValue[length].operand + e.target.value,
         },
       ]);
+    } else if (e.target.value === 'C') {
+      setExpression([
+        {operand: initialValue}
+      ])
+    } else if (e.target.value === 'del'){
+      setExpression([
+        ...expression.slice(0, length - 1),
+        {operand: initialValue}
+      ])
     } else {
       length = expression[length].operand === "" ? length - 1 : length + 1;
       if (length < 1 && !e.target.dataset.unary) return;
-
+      
       setExpression([
         ...expression.slice(0, length),
         {operator: e.target, id: expression.length},
         { operand: initialValue },
       ]);
     }
+
+    
   };
+
   return [expression, onClick];
 };
