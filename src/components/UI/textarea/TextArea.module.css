@@ -1,5 +1,4 @@
 .textarea {
-  resize: none;
   border: none;
   color: beige;
   width: 100%;
@@ -8,7 +7,13 @@
   user-select: none;
   font-size: 30px;
   padding-right: 35px;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 .textarea:focus {
   outline: none;
+}
+
+.textarea::-webkit-scrollbar {
+  display: none;
 }

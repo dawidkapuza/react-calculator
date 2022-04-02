@@ -34,7 +34,7 @@ export const useExpression = (initialValue) => {
       }
     } else {
       length = expression[length].operand === "" ? length - 1 : length + 1;
-      if (length < 1 && !btn.dataset.unary) return;
+      if (length < 1) return;
 
       setExpression([
         ...expression.slice(0, length),
