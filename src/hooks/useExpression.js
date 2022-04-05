@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 export const useExpression = (initialValue) => {
-  const [floatIsUsed, setFloatIsUsed] = useState(false);
   const [expression, setExpression] = useState([
     {
       operand: initialValue,
@@ -40,20 +39,18 @@ export const useExpression = (initialValue) => {
         ]);
       }
     } else if (btn.value === ",") {
-      if (!floatIsUsed) {
-        setExpression((prevValue) => [
-          ...expression.slice(0, length),
-          {
-            operand:
-              prevValue[length].operand === ""
-                ? "0."
-                : prevValue[length].operand + ".",
-          },
-        ]);
-      }
-      setFloatIsUsed(true);
+      if (expression[length].operand.includes(".")) return;
+
+      setExpression((prevValue) => [
+        ...expression.slice(0, length),
+        {
+          operand:
+            prevValue[length].operand === ""
+              ? "0."
+              : prevValue[length].operand + ".",
+        },
+      ]);
     } else {
-      setFloatIsUsed(false);
       length = expression[length].operand === "" ? length - 1 : length + 1;
       if (length < 1) return;
 
