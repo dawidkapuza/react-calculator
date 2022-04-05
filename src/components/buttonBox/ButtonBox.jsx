@@ -18,20 +18,21 @@ export default function ButtonBox(props) {
             value={value === 'x²' ? '^' : value}
             data-priority={priority}
             data-unary={unary}
+            className={isNaN(+value) ? cl.nonNumericSymbol : cl.numericSymbol}
           >
             {value === "del" ? (
               <FontAwesomeIcon
-                style={{ color: "whitesmoke", height: "16px" }}
+                style={{ color: "#f75e11", height: "17px" }}
                 icon={faDeleteLeft}
               />
             ) : value === "C" ? (
               <FontAwesomeIcon
-                style={{ color: "whitesmoke", height: "16px" }}
+                style={{ color: "#f75e11", height: "18px" }}
                 icon={faRemove}
               />
             ) : value === 'more'? (
               <FontAwesomeIcon
-                style={{ color: "whitesmoke", height: "16px" }}
+                style={{ color: "#f75e11", height: "18px" }}
                 icon={faCompress}
               />
             ) : value}

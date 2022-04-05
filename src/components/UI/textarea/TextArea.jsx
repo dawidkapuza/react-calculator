@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import cl from "./TextArea.module.css";
 
 export default class TextArea extends React.Component {

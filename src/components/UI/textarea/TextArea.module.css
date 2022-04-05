@@ -1,4 +1,5 @@
 .textarea {
+  resize: none;
   border: none;
   color: beige;
   width: 100%;

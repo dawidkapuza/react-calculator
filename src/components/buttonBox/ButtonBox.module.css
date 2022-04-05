@@ -6,3 +6,14 @@
 
 }
 
+.nonNumericSymbol {
+  color: #f75e11;
+  font-size: 25px;
+}
+
+.numericSymbol {
+  color: whitesmoke;
+  font-size: 25px;
+  font-weight: 500;
+}
+
