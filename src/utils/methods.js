@@ -5,7 +5,6 @@ export default class Methods {
     this["*"] = (a, b) => a * b;
     this["/"] = (a, b) => a / b;  
     this["^"] = (a, b) => a ** b;  
-    this["."] = (a, b) => +`${a}.${b}`;
     this["="] = (a, b) => a;
   }
 }

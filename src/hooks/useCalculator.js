@@ -1,14 +1,15 @@
 import { useExpression } from "./useExpression";
 import Methods from "../utils/methods";
+import numberFormatting from "../utils/numberFormatting";
 
 class Calculator extends Methods {
  
   useCalculator = (defaultResult) => {
     const [expression, onClick] = useExpression(defaultResult);
 
-    const formattedExpression = [...expression]
+    const formattedExpression = [...expression] // TO DO: Move whole number & number formatting in a separate utils file
       .map((item) => {
-        return item?.operator?.value ? item.operator.value : item.operand;
+        return item?.operator?.value ? item.operator.value : numberFormatting(item.operand);
       })
       .join("");
 

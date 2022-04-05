@@ -17,6 +17,6 @@ export const buttonsContent = [
   { value: "+", priority: "12" },
   { value: "more", priority: "15" },
   { value: "0",},
-  { value: ".", priority: "15"},
+  { value: ",", priority: "15"},
   { value: "=", priority: "10" },
 ];
