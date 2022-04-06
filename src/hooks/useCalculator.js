@@ -33,6 +33,7 @@ class Calculator extends Methods {
           }
         });
       });
+      result = result[0].operand
     return [result, formattedExpression, onClick];
   };
 }

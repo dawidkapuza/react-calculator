@@ -13,6 +13,8 @@ export const useExpression = (initialValue) => {
     if (btn.value === "more") return; // TO DO...
 
     let length = expression.length ? expression.length - 1 : expression.length;
+    let currentOperand = expression[length]?.operand
+    
     if (!isNaN(btn.value)) {
       setExpression((prevValue) => [
         ...expression.slice(0, length),
@@ -23,7 +25,7 @@ export const useExpression = (initialValue) => {
     } else if (btn.value === "C") {
       setExpression([{ operand: initialValue }]);
     } else if (btn.value === "del") {
-      if (expression[length]?.operand === "") {
+      if (currentOperand === "") {
         if (!length) return;
         setExpression([...expression.slice(0, length - 1)]);
       } else {
@@ -31,15 +33,15 @@ export const useExpression = (initialValue) => {
           ...expression.slice(0, length),
           {
             operand:
-              expression[length].operand.slice(
+            currentOperand.slice(
                 0,
-                expression[length].operand.length - 1
+              currentOperand.length - 1
               ) || "",
           },
         ]);
       }
     } else if (btn.value === ",") {
-      if (expression[length].operand.includes(".")) return;
+      if (currentOperand.includes(".")) return;
 
       setExpression((prevValue) => [
         ...expression.slice(0, length),
@@ -51,7 +53,7 @@ export const useExpression = (initialValue) => {
         },
       ]);
     } else {
-      length = expression[length].operand === "" ? length - 1 : length + 1;
+      length = currentOperand === "" ? length - 1 : length + 1;
       if (length < 1) return;
 
       setExpression([
