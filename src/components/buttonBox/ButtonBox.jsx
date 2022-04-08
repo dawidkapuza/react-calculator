@@ -13,7 +13,7 @@ export default function ButtonBox(props) {
         return (
           <Button
             key={value}
-            value={value}
+            value={value === ',' ? '.' : value}
             data-priority={priority}
             data-unary={unary}
             className={isNaN(+value) ? cl.nonNumericSymbol : cl.numericSymbol}

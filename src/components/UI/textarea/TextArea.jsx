@@ -13,6 +13,10 @@ export default class TextArea extends React.Component {
       node.scrollTop = node.scrollHeight;
     });
   }
+  componentDidUpdate() {
+    const node = this.textArea.current;
+    node.scrollTop = node.scrollHeight;
+  }
 
   render() {
     return (

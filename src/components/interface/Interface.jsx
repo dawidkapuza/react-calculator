@@ -1,17 +1,16 @@
 import React from "react";
+import { useCalculator } from "../../hooks/useCalculator";
 import ButtonBox from "../buttonBox/ButtonBox";
 import Screen from "../screen/Screen";
-import { calculator } from "../../hooks/useCalculator";
 import cl from "./Interface.module.css";
-import numberFormatting from "../../utils/numberFormatting";
 
 export default function Interface() {
-  const [result, formattedExpression, onClick] = calculator.useCalculator("");
+  const [result, expression, onClick] = useCalculator("");
 
   return (
     <div className={cl.interface}>
-      <Screen>{`\r\r\r\r\r${formattedExpression}\r${
-        result ? '= ' + numberFormatting(result) : 0
+      <Screen>{`\r\r\r\r\r${expression}\r${
+        result ? '= ' + result : 0
       }`}</Screen>
 
       <ButtonBox onClick={onClick} />

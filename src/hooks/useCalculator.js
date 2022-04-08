@@ -1,41 +1,30 @@
-import { useExpression } from "./useExpression";
-import Methods from "../utils/methods";
-import numberFormatting from "../utils/numberFormatting";
+import { evaluate } from "mathjs";
+import { useState } from "react";
+console.log(evaluate("12/(2.3+0.7)"));
 
-class Calculator extends Methods {
- 
-  useCalculator = (defaultResult) => {
-    const [expression, onClick] = useExpression(defaultResult);
+export const useCalculator = (initialValue) => {
+  const [expression, setExpression] = useState(initialValue);
 
-    const formattedExpression = [...expression] // TO DO: Move whole number & number formatting in a separate utils file
-      .map((item) => {
-        return item?.operator?.value ? item.operator.value : numberFormatting(item.operand);
-      })
-      .join("");
+  const onClick = (e) => {
+    let btn = e.target.closest("button");
+    if (!btn || !btn.parentElement.contains(btn)) return;
 
-    let result = [...expression];
+    if (btn.value === "more") return; // TO DO...
 
-    [...expression]
-      .map((item) =>
-        !(item?.operand || item?.operand === "") ? { ...item } : false
-      )
-      .filter((i) => i)
-      .sort((a, b) => b.operator.dataset.priority - a.operator.dataset.priority)
-      .forEach((byPriority) => {
-        result.forEach((item, index) => {
-          if (item?.id === byPriority.id) {
-            result.splice(index - 1, 3, {
-              operand: this[result[index].operator.value](
-                +result[index - 1].operand,
-                +result[index + 1].operand
-              ),
-            });
-          }
-        });
-      });
-      result = result[0].operand
-    return [result, formattedExpression, onClick];
+    isNaN(btn.value)
+      ? setExpression((prevValue) => prevValue + btn.value + "0")
+      : setExpression((prevValue) =>
+          prevValue.endsWith("0")
+            ? prevValue.slice(0, prevValue.length - 1) + btn.value
+            : prevValue + btn.value
+        );
+
+    if (btn.value === "C") {
+      setExpression(initialValue);
+    } else if (btn.value === "del") {
+      setExpression(expression.slice(0, expression.length - 1) || "");
+    }
   };
-}
-
-export const calculator = new Calculator();
+  let result = evaluate(expression);
+  return [result, expression, onClick];
+};
