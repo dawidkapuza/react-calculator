@@ -1,4 +1,4 @@
-import { faCompress, faDeleteLeft, faDivide, faMultiply, faPercent, faTrashCan, faSuperscript } from "@fortawesome/free-solid-svg-icons";
+import { faCompress, faDeleteLeft, faDivide, faMultiply, faPercent, faSuperscript, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { buttonsContent } from "../../utils/buttonsContent";
@@ -9,21 +9,20 @@ export default function ButtonBox(props) {
   return (
     <div className={cl.buttonBox} onClick={props.onClick}>
       {buttonsContent.map((btn) => {
-        let { value, priority = null, unary = "" } = btn;
+        let { value, isunary = "" } = btn;
         return (
           <Button
             key={value}
             value={value}
-            data-priority={priority}
-            data-unary={unary}
+            isunary={isunary}
             className={isNaN(+value) ? cl.nonNumericSymbol : cl.numericSymbol}
           >
-            {value === "del" ? (
+            {value === "backspace" ? (
               <FontAwesomeIcon
                 style={{height: "17px" }}
                 icon={faDeleteLeft}
               />
-            ) : value === "C" ? (
+            ) : value === "erase" ? (
               <FontAwesomeIcon
                 style={{height: "17px" }}
                 icon={faTrashCan}

@@ -13,6 +13,10 @@ export default class TextArea extends React.Component {
       node.scrollTop = node.scrollHeight;
     });
   }
+  componentDidUpdate() {
+    const node = this.textArea.current;
+    node.scrollTop = node.scrollHeight;
+  }
 
   render() {
     return (
@@ -21,6 +25,7 @@ export default class TextArea extends React.Component {
         className={cl.textarea}
         {...this.props}
         value={this.props.children}
+        tabIndex="-1"
       />
     );
   }
