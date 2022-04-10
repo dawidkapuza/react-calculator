@@ -25,6 +25,7 @@ export default class TextArea extends React.Component {
         className={cl.textarea}
         {...this.props}
         value={this.props.children}
+        tabIndex="-1"
       />
     );
   }
