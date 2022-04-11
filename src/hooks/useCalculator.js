@@ -8,13 +8,14 @@ export const useCalculator = (initialValue) => {
     if (!btn || !btn.parentElement.contains(btn)) return;
 
     const isUnary = btn.getAttribute("isunary");
-
     const floatIsUsed = btn.value === "." && /\.\d+$/.test(expression);
+    const floatIsAllowed = btn.value === "." && (expression.endsWith("0") || !expression)
 
-    if (btn.value === "more" || btn.value === "=") return; // TO DO...
+    if (btn.value === "more" || btn.value === "=" || !expression && btn.value === '0') return; // TO DO...
+    
     if (isNaN(btn.value)) {
-      if ((!expression.length && !isUnary) || floatIsUsed) return;
-      if (btn.value === "." && (expression.endsWith("0") || !expression)) {
+      if ((!expression && !isUnary) || floatIsUsed) return;
+      if (floatIsAllowed) {
         setExpression(
           (prevValue) => prevValue.slice(0, prevValue.length - 1) + "0.0"
         );
@@ -33,7 +34,6 @@ export const useCalculator = (initialValue) => {
           : prevValue + btn.value
       );
     }
-    console.log(btn.value);
     if (btn.value === "erase") {
       setExpression(initialValue);
     } else if (btn.value === "backspace") {
