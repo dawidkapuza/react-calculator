@@ -1,4 +1,4 @@
-export const buttonsContent = [
+export const btnValues = [
   { value: "erase" },
   { value: "backspace" },
   { value: '^' },
