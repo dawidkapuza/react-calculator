@@ -1,18 +1,39 @@
 import { mathjs } from "../utils/math.js";
 import { useState, useMemo } from "react";
+import { toLocaleString } from "../utils/formatting.js";
 
 export const useCalculator = (initialValue) => {
   const [expression, setExpression] = useState(initialValue);
+  const [history, setHistory] = useState([
+    { expression: initialValue, result: initialValue },
+  ]);
+
+  let result = initialValue;
   const onClick = (e) => {
     let btn = e.target.closest("button");
     if (!btn || !btn.parentElement.contains(btn)) return;
 
     const isUnary = btn.getAttribute("isunary");
     const floatIsUsed = btn.value === "." && /\.\d+$/.test(expression);
-    const floatIsAllowed = btn.value === "." && (expression.endsWith("0") || !expression)
+    const floatIsAllowed =
+      btn.value === "." && (expression.endsWith("0") || !expression);
 
-    if (btn.value === "more" || btn.value === "=" || !expression && btn.value === '0') return; // TO DO...
-    
+    if (btn.value === "more" || (!expression && btn.value === "0")) return; // TO DO...
+
+    if (btn.value === "=") {
+      if (!expression) return;
+      setHistory([
+        
+        {
+          expression: toLocaleString(expression),
+          result
+        },
+        ...history,
+      ]);
+      setExpression(initialValue)
+      return;
+    }
+
     if (isNaN(btn.value)) {
       if ((!expression && !isUnary) || floatIsUsed) return;
       if (floatIsAllowed) {
@@ -36,6 +57,7 @@ export const useCalculator = (initialValue) => {
     }
     if (btn.value === "erase") {
       setExpression(initialValue);
+      setHistory([{ expression: initialValue, result: initialValue }]);
     } else if (btn.value === "backspace") {
       setExpression(
         (prevValue) =>
@@ -47,7 +69,7 @@ export const useCalculator = (initialValue) => {
     }
   };
 
-  let result = useMemo(() => mathjs.evaluate(expression), [expression]);
+  result = useMemo(() => toLocaleString(mathjs.evaluate(expression)), [expression]);
 
-  return [result, expression, onClick];
+  return [result, toLocaleString(expression), history, onClick];
 };
