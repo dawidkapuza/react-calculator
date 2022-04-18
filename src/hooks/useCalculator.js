@@ -19,7 +19,7 @@ export const useCalculator = (initialValue) => {
     if (!btn || !btn.parentElement.contains(btn)) return;
 
     const isUnary = btn.getAttribute("isunary");
-    const floatingPointIsUsed = /\.\d+$/.test(expression);
+    const floatingPointIsUsed = btn.value === "." && /\.\d+$/.test(expression);
     const floatingPointIsAllowed =
       btn.value === "." && (expression.endsWith("0") || !expression);
 
@@ -45,7 +45,7 @@ export const useCalculator = (initialValue) => {
           prevValue.slice(
             0,
             expression.length - (/\D0$/.test(expression) ? 2 : 1)
-          ) + (/\D`[1-9]`$/.test(expression) ? "0" : "")
+          ) + (/\D[1-9]$/.test(expression) ? "0" : "")
       );
       return;
     } else if (btn.value === "more") {
