@@ -3,5 +3,6 @@ export const toLocaleString = (num) =>
     ? num
         .toString()
         .replace(/(?<=\D)0$/, "")
-        .replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, "$1 ")
+        .replace("Infinity", "∞")
+        .replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\D|$))/g, "$1 ")
     : "";

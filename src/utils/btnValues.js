@@ -1,5 +1,5 @@
 export const btnValues = [
-  { value: "erase" },
+  { value: "erase", isunary: 'true' },
   { value: "backspace" },
   { value: '^' },
   { value: "/" },

@@ -24,7 +24,8 @@
   right: 0;
   bottom: 0;
   text-align: right;
-  height: 100%; /* TODO: Make content scrollable without setting height */
+  height: 100%;
+  width: 100%;
   padding-right: 10%;
   padding-left: 10%;
   margin-bottom: 1rem;

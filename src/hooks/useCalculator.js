@@ -8,40 +8,61 @@ export const useCalculator = (initialValue) => {
     { expression: initialValue, result: initialValue },
   ]);
 
-  let result = initialValue;
+  let result = useMemo(
+    () => toLocaleString(mathjs.evaluate(expression)),
+    [expression]
+  );
+
   const onClick = (e) => {
+    // Button's DOM element's verification
     let btn = e.target.closest("button");
     if (!btn || !btn.parentElement.contains(btn)) return;
 
     const isUnary = btn.getAttribute("isunary");
-    const floatIsUsed = btn.value === "." && /\.\d+$/.test(expression);
-    const floatIsAllowed =
+    const floatingPointIsUsed = /\.\d+$/.test(expression);
+    const floatingPointIsAllowed =
       btn.value === "." && (expression.endsWith("0") || !expression);
 
-    if (btn.value === "more" || (!expression && btn.value === "0")) return; // TO DO...
-
+    // SPECIAL SYMBOL'S HANDLING --------------------------------------------------------------------------------------
     if (btn.value === "=") {
       if (!expression) return;
       setHistory([
-        
         {
           expression: toLocaleString(expression),
-          result
+          result,
         },
         ...history,
       ]);
-      setExpression(initialValue)
+      setExpression(initialValue);
+      return;
+    } else if (btn.value === "erase") {
+      setExpression(initialValue);
+      setHistory([{ expression: initialValue, result: initialValue }]);
+      return;
+    } else if (btn.value === "backspace") {
+      setExpression(
+        (prevValue) =>
+          prevValue.slice(
+            0,
+            expression.length - (/\D0$/.test(expression) ? 2 : 1)
+          ) + (/\D`[1-9]`$/.test(expression) ? "0" : "")
+      );
+      return;
+    } else if (btn.value === "more") {
+      // TO DO
       return;
     }
-
+    // NON NUMERIC SYMBOL'S HANDLING -----------------------------------------------------------------------------------
     if (isNaN(btn.value)) {
-      if ((!expression && !isUnary) || floatIsUsed) return;
-      if (floatIsAllowed) {
+      // Floating point handling
+      if ((!expression && !isUnary) || floatingPointIsUsed) return;
+      if (floatingPointIsAllowed) {
         setExpression(
           (prevValue) => prevValue.slice(0, prevValue.length - 1) + "0.0"
         );
         return;
       }
+      // Non numeric symbols
       expression.endsWith("0")
         ? setExpression(
             (prevValue) =>
@@ -49,27 +70,15 @@ export const useCalculator = (initialValue) => {
           )
         : setExpression((prevValue) => prevValue + btn.value + "0");
     } else {
+      // NUMERIC SYMBOL'S HANDLING ---------------------------------------------------------------------------------------
+      if (btn.value === "0" && !expression) return;
       setExpression((prevValue) =>
         expression.endsWith("0")
           ? prevValue.slice(0, prevValue.length - 1) + btn.value
           : prevValue + btn.value
       );
     }
-    if (btn.value === "erase") {
-      setExpression(initialValue);
-      setHistory([{ expression: initialValue, result: initialValue }]);
-    } else if (btn.value === "backspace") {
-      setExpression(
-        (prevValue) =>
-          prevValue.slice(
-            0,
-            expression.length - (/\D0$/.test(expression) ? 2 : 1)
-          ) + (/\D[1-9]$/.test(expression) ? "0" : "")
-      );
-    }
   };
-
-  result = useMemo(() => toLocaleString(mathjs.evaluate(expression)), [expression]);
 
   return [result, toLocaleString(expression), history, onClick];
 };
