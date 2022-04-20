@@ -6,7 +6,8 @@ import Screen from "../screen/Screen";
 import cl from "./Interface.module.css";
 
 export default function Interface() {
-  const [result, expression, history, onClick] = useCalculator("");
+  const [result, expression, history, extendedMod, onClick] =
+    useCalculator("");
 
   let expressionFromHistory = history[0].expression;
   let resultFromHistory = history[0].result;
@@ -15,8 +16,10 @@ export default function Interface() {
     <div className={cl.interface}>
       <Screen>
         <div className={cl.content}>
-          <History history={history} expressionIsNew={expressionIsNew}/>
-          <span className={expressionIsNew || history.length < 2 ? cl.selected : ""}>
+          <History history={history} expressionIsNew={expressionIsNew} />
+          <span
+            className={expressionIsNew || history.length < 2 ? cl.selected : ""}
+          >
             {expression
               ? expression
               : expressionFromHistory
@@ -32,8 +35,8 @@ export default function Interface() {
           </span>
         </div>
       </Screen>
-
-      <ButtonBox onClick={onClick} />
+      <hr style={{border: "0.2px solid rgb(58 58 58 / 70%)", height: "0.2px", width: "90%",marginLeft: "5%"}}/>
+      <ButtonBox onClick={onClick} extendedMod={extendedMod} />
     </div>
   );
 }

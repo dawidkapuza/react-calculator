@@ -7,6 +7,7 @@ export const useCalculator = (initialValue) => {
   const [history, setHistory] = useState([
     { expression: initialValue, result: initialValue },
   ]);
+  const [extendedMod, setExtendedMod] = useState(false)
 
   let result = useMemo(
     () => toLocaleString(mathjs.evaluate(expression)),
@@ -48,22 +49,22 @@ export const useCalculator = (initialValue) => {
           ) + (/\D[1-9]$/.test(expression) ? "0" : "")
       );
       return;
-    } else if (btn.value === "more") {
-      // TO DO
-      return;
-    }
-    // NON NUMERIC SYMBOL'S HANDLING -----------------------------------------------------------------------------------
-    if (isNaN(btn.value)) {
-      // Floating point handling
-      if ((!expression && !isUnary) || floatingPointIsUsed) return;
+    } else if (btn.value === '.') {
+      if (floatingPointIsUsed) return
       if (floatingPointIsAllowed) {
         setExpression(
           (prevValue) => prevValue.slice(0, prevValue.length - 1) + "0.0"
         );
         return;
       }
-      // Non numeric symbols
-      expression.endsWith("0")
+    } else if (btn.value === "showExtended" || btn.value === "hideExtended") {
+      setExtendedMod((prevValue) => !prevValue)
+      return;
+    }
+    // NON NUMERIC SYMBOL'S HANDLING -----------------------------------------------------------------------------------
+    if (isNaN(btn.value)) {
+      if (!expression && !isUnary) return;
+      /\D0$/.test(expression)
         ? setExpression(
             (prevValue) =>
               prevValue.slice(0, prevValue.length - 2) + btn.value + "0"
@@ -73,12 +74,12 @@ export const useCalculator = (initialValue) => {
       // NUMERIC SYMBOL'S HANDLING ---------------------------------------------------------------------------------------
       if (btn.value === "0" && !expression) return;
       setExpression((prevValue) =>
-        expression.endsWith("0")
+        /\D0$/.test(expression)
           ? prevValue.slice(0, prevValue.length - 1) + btn.value
           : prevValue + btn.value
       );
     }
   };
 
-  return [result, toLocaleString(expression), history, onClick];
+  return [result, toLocaleString(expression), history, extendedMod, onClick];
 };

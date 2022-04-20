@@ -5,16 +5,20 @@ import Icon from "../UI/icon/Icon";
 import cl from "./ButtonBox.module.css";
 
 export default function ButtonBox(props) {
+ 
   return (
-    <div className={cl.buttonBox} onClick={props.onClick}>
-      {btnValues.map((btn) => {
-        let { value, isunary = "" } = btn;
+    <div className={props.extendedMod ? cl.extendedButtonBox : cl.buttonBox} onClick={props.onClick} >
+      {btnValues
+        .filter(btn => !btn.extended || props.extendedMod)
+        .map((btn) => {
+        let { value, isunary = "", extended = false} = btn;
+        let iconClass = extended ? cl.extended : isNaN(btn.value) ? cl.basic : cl.basicNumeric
         return (
           <Button
             key={value}
             value={value}
             isunary={isunary}
-            className={isNaN(+value) ? cl.nonNumericSymbol : cl.numericSymbol}
+            className={iconClass}
           >
             <Icon value={value}></Icon>
           </Button>
